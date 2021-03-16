@@ -1,0 +1,25 @@
+case_suite: saber_referral_active_test
+descrpiton: 小程序转介绍活动后台管理接口测试
+moduels:
+  -moduel_class: TestReferralRules
+    desc: 转介绍规则
+    cases:
+      - story: test_referral_rule_list
+        desc: 默认规则列表查询
+        uri: /saber/backend/rule
+        method: post
+        headers:
+        type: data
+        data:
+          activity_end_at: '2019-04-06T23:59:59+08:00'
+          activity_start_at: '2019-02-23T00:00:00+08:00'
+          division: 中端
+          page: 1
+          page_size: 30
+        auth_user:
+          u: dongjie02
+        set_up:
+        tear_down:
+        asserts:
+          body.status: '00000'
+          body.data.orgArr[0]: '集团管理层'
