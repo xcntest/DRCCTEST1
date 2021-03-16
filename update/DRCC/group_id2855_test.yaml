@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: group_id2855_test
+  descrpiton: 更新单个资产组信息接口
+  moduel_class: Test2855
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 更新单个资产组信息接口
+  mark: ''
+  method: PUT
+  url: /api/v1/asset_groups/:group_id
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json:
+    name: ''
+    desc: ''
+  status: ''
+  extract: ''
+  expects: ''

@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: asset_groups2853_test
+  descrpiton: 获取资产组列表接口
+  moduel_class: Test2853
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 获取资产组列表接口
+  mark: ''
+  method: GET
+  url: /api/v1/asset_groups
+  headers:
+    Authorization: $token
+  timeout: 8
+  params:
+    page: ''
+    per_page: ''
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

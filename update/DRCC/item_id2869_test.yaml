@@ -1,0 +1,30 @@
+testinfo:
+  case_suite: item_id2869_test
+  descrpiton: 告警配置自定义模板编辑接口
+  moduel_class: Test2869
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 告警配置自定义模板编辑接口
+  mark: ''
+  method: PUT
+  url: /api/v1/mon/alert/:item_id
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json:
+    tag: ''
+    alert_content: ''
+    alert: ''
+    serious: ''
+    pair_id_list: ''
+    is_open: ''
+    is_basic: ''
+  status: ''
+  extract: ''
+  expects: ''

@@ -1,0 +1,23 @@
+testinfo:
+  case_suite: pairs2951_test
+  descrpiton: 容灾对全局检测接口
+  moduel_class: Test2951
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 容灾对全局检测接口
+  mark: ''
+  method: POST
+  url: /api/v1/assets/db/pairs
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

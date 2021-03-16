@@ -1,0 +1,23 @@
+testinfo:
+  case_suite: pair_id2825_test
+  descrpiton: 容灾检测接口
+  moduel_class: Test2825
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 容灾检测接口
+  mark: ''
+  method: POST
+  url: /api/v1/assets/db/pairs/:pair_id
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

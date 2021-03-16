@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: asset_groups2851_test
+  descrpiton: 创建资产组信息接口
+  moduel_class: Test2851
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 创建资产组信息接口
+  mark: ''
+  method: POST
+  url: /api/v1/asset_groups
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json:
+    name: ''
+    desc: ''
+  status: ''
+  extract: ''
+  expects: ''

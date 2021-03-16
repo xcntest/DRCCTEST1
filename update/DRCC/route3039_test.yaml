@@ -1,0 +1,26 @@
+testinfo:
+  case_suite: route3039_test
+  descrpiton: 编排区路由更新
+  moduel_class: Test3039
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 编排区路由更新
+  mark: ''
+  method: POST
+  url: /api/v1/asset_groups/:group_id/schedule/route
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json:
+    message: ''
+    nodes: ''
+    routes: ''
+  status: ''
+  extract: ''
+  expects: ''

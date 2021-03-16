@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: history2905_test
+  descrpiton: 告警历史
+  moduel_class: Test2905
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 告警历史
+  mark: ''
+  method: GET
+  url: /api/v1/mon/alert/history
+  headers:
+    Authorization: $token
+  timeout: 8
+  params:
+    page: ''
+    per_page: ''
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

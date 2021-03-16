@@ -1,0 +1,23 @@
+testinfo:
+  case_suite: route3037_test
+  descrpiton: 编排区路由列表
+  moduel_class: Test3037
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 编排区路由列表
+  mark: ''
+  method: GET
+  url: /api/v1/asset_groups/:group_id/schedule/route
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

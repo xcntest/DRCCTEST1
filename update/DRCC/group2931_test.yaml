@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: group2931_test
+  descrpiton: 监控首页资产组列表
+  moduel_class: Test2931
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 监控首页资产组列表
+  mark: ''
+  method: GET
+  url: /api/v1/mon/asset/group
+  headers:
+    Authorization: $token
+  timeout: 8
+  params:
+    page: ''
+    per_page: ''
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

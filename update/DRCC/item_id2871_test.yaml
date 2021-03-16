@@ -1,0 +1,23 @@
+testinfo:
+  case_suite: item_id2871_test
+  descrpiton: 告警配置自定义模板删除接口
+  moduel_class: Test2871
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 告警配置自定义模板删除接口
+  mark: ''
+  method: DELETE
+  url: /api/v1/mon/alert/:item_id
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

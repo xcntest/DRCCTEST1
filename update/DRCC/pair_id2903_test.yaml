@@ -1,0 +1,23 @@
+testinfo:
+  case_suite: pair_id2903_test
+  descrpiton: 单个容灾对关系检测
+  moduel_class: Test2903
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 单个容灾对关系检测
+  mark: ''
+  method: PUT
+  url: /api/v1/assets/db/pairs/:pair_id
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

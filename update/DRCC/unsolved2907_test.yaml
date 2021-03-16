@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: unsolved2907_test
+  descrpiton: 待处理告警
+  moduel_class: Test2907
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 待处理告警
+  mark: ''
+  method: GET
+  url: /api/v1/mon/alert/history/unsolved
+  headers:
+    Authorization: $token
+  timeout: 8
+  params:
+    page: ''
+    per_page: ''
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

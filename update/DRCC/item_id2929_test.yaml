@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: item_id2929_test
+  descrpiton: 告警配置获取关联容灾对列表接口
+  moduel_class: Test2929
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 告警配置获取关联容灾对列表接口
+  mark: ''
+  method: GET
+  url: /api/v1/mon/alert/assets/:item_id
+  headers:
+    Authorization: $token
+  timeout: 8
+  params:
+    page: ''
+    per_page: ''
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

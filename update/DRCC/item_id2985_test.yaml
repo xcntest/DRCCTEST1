@@ -1,0 +1,24 @@
+testinfo:
+  case_suite: item_id2985_test
+  descrpiton: 告警配置控制模板开关接口
+  moduel_class: Test2985
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 告警配置控制模板开关接口
+  mark: ''
+  method: PUT
+  url: /api/v1/mon/alert/switch/:item_id
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json:
+    is_open: ''
+  status: ''
+  extract: ''
+  expects: ''

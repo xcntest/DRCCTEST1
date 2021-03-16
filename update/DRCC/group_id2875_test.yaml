@@ -1,0 +1,23 @@
+testinfo:
+  case_suite: group_id2875_test
+  descrpiton: 删除资产组接口
+  moduel_class: Test2875
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 删除资产组接口
+  mark: ''
+  method: DELETE
+  url: /api/v1/asset_groups/:group_id
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

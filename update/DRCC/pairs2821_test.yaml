@@ -1,0 +1,26 @@
+testinfo:
+  case_suite: pairs2821_test
+  descrpiton: 获取容灾对列表
+  moduel_class: Test2821
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 获取容灾对列表
+  mark: ''
+  method: GET
+  url: /api/v1/assets/db/pairs
+  headers:
+    Authorization: $token
+  timeout: 8
+  params:
+    page: ''
+    per_page: ''
+    group_id: ''
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

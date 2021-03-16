@@ -1,0 +1,30 @@
+testinfo:
+  case_suite: alert2867_test
+  descrpiton: 告警配置自定义模板创建接口
+  moduel_class: Test2867
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 告警配置自定义模板创建接口
+  mark: ''
+  method: POST
+  url: /api/v1/mon/alert
+  headers:
+    Authorization: $token
+  timeout: 8
+  params: {}
+  data: ''
+  files: ''
+  json:
+    tag: ''
+    alert_content: ''
+    alert: ''
+    serious: ''
+    pair_id_list: ''
+    is_open: ''
+    is_basic: ''
+  status: ''
+  extract: ''
+  expects: ''

@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: switch_records3069_test
+  descrpiton: 获取切换记录列表接口
+  moduel_class: Test3069
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 获取切换记录列表接口
+  mark: ''
+  method: GET
+  url: /api/v1/asset_groups/switch_records
+  headers:
+    Authorization: $token
+  timeout: 8
+  params:
+    page: ''
+    per_page: ''
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''

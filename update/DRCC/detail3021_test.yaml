@@ -1,0 +1,25 @@
+testinfo:
+  case_suite: detail3021_test
+  descrpiton: 拓扑图节点详情接口
+  moduel_class: Test3021
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+- test_name: ''
+  info: 拓扑图节点详情接口
+  mark: ''
+  method: GET
+  url: /api/v1/mon/asset/detail
+  headers:
+    Authorization: $token
+  timeout: 8
+  params:
+    id: ''
+    type: ''
+  data: ''
+  files: ''
+  json: {}
+  status: ''
+  extract: ''
+  expects: ''
