@@ -26,6 +26,7 @@ class HadnlerYaml:
         with open(yaml_path, encoding='utf-8') as cf:
             try:
                 data = yaml.load(cf,Loader=yaml.Loader)
+                print(data)
                 yaml_dada = AttrDict.AttrDict(data)  #交读取的yaml字内属性化
                 return yaml_dada
             except yaml.scanner.ScannerError:

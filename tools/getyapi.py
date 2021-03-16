@@ -93,7 +93,7 @@ class GetYapi(object):
         data_dict["modle_name"] = self.pathmodlename  # 接口所属模块名称
         #拼接case_suite
         name = pathdata.get("query_path").get("path").split('/')
-        case_suite = name[-1].lstrip(':')+'test'+'_'+str(self.pathid)
+        case_suite = name[-1].lstrip(':')+str(self.pathid)+"_"+"test"
         #处理要写入yaml的数据
         data_dict["case_suite"] = case_suite  #yaml文件名
         data_dict["descrption"] = pathdata.get("title")  # 接口名称
@@ -147,34 +147,36 @@ class GetYapi(object):
         """创建yaml文件"""
         #存yaml列表
         self.logs.info("接口获取的数据为{}".format(self.pathdicts))
-        yaml_data = {}
-        yaml_data["case_suite"] = self.pathdicts.get("case_suite")
-        yaml_data["descrpiton"] = self.pathdicts.get("descrption")
-        yaml_data["base_url"] = ''
-        mouduels_data = []
-        model_class_data = {}
-        model_class_data["moduel_class"] = self.pathdicts.get("modle_class")
-        model_class_data["desc"] = ''
-        case_data = []
-        story_data = {}
-        story_data["story"] =""
-        story_data["desc"] = self.pathdicts.get("descrption")
-        story_data["mark"] = ""
-        story_data["url"] = self.pathdicts.get("url")
-        story_data["method"] = self.pathdicts.get("method")
-        story_data["headers"] = {"Content-Type":self.pathdicts.get("headers")}
-        story_data["params"] = self.pathdicts.get("params")
-        story_data["json"] = self.pathdicts.get("json")
-        story_data["set_up"] = ""
-        story_data["tear_down"] = ""
-        story_data["extract"] = ""
-        story_data["asserts"] = ""
-        case_data.append(story_data)
+        yaml_data = {}   #整个文档
+        testinfo = {}   #存入test_info
+        testinfo["case_suite"] = self.pathdicts.get("case_suite")
+        testinfo["descrpiton"] = self.pathdicts.get("descrption")
+        testinfo["moduel_class"] = self.pathdicts.get("modle_class")
+        yaml_data["testinfo"] = testinfo
+
+        yaml_data["premise"] = ""
+        yaml_data["set_up"] = ""
+        yaml_data["tear_down"] = ""
+        #加入case文件
+        case_list = []
+        case_data = {}
+        case_data["test_name"] =""
+        case_data["info"] = self.pathdicts.get("descrption")
+        case_data["mark"] = ""
+        case_data["method"] = self.pathdicts.get("method")
+        case_data["url"] = self.pathdicts.get("url")
+        case_data["headers"] = {"Authorization":'$token'}
+        case_data["timeout"] = 8
+        case_data["params"] = self.pathdicts.get("params")
+        case_data["data"] = ""
+        case_data["files"] = ""
+        case_data["json"] = self.pathdicts.get("json")
+        case_data["status"] = ""
+        case_data["extract"] = ""
+        case_data["expects"] = ""
+        case_list.append(case_data)
         #加入case
-        model_class_data["cases"] = case_data
-        #加入moduel_class
-        mouduels_data.append(model_class_data)
-        yaml_data["moduels"] = mouduels_data
+        yaml_data["test_case"] = case_list
 
         # 装写入的配置文件写入到yaml
         yaml_file_name = self.pathdicts.get("case_suite")+".yaml"
