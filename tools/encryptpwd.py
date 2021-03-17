@@ -11,7 +11,9 @@
 # from Crypto.Cipher import PKCS1_v1_5
 # from Crypto.PublicKey import RSA
 import hashlib
-
+import config
+import os
+import jpype
 
 
 def MD5Encrypt(key):
@@ -21,6 +23,30 @@ def MD5Encrypt(key):
     return a_md5
 
 
+
+
+
+def call_jar(content):
+    # 以下三个路径依次：jvm.dll地址、ApiHelper.jar地址
+    jvmPath = jpype.getDefaultJVMPath()
+    jarPath = os.path.join(config.root_dir, "lib\AES.jar")
+
+    # startJVM("jvm.dll地址", "-ea", "ApiHelper.jar地址", "ApiHelper.jar依赖库文件夹地址")
+    # 第四个参数非必填项，有就填，没有就不填
+    jpype.startJVM(jvmPath, "-ea", "-Djava.class.path=%s" % jarPath)
+
+    JDClass = jpype.JClass("com.hzmc.test.AESForNodejs")
+    aesHandler = JDClass()
+    test = str(aesHandler.encrypt(content))
+
+    jpype.shutdownJVM()
+
+    return test
+
+
+if __name__ == '__main__':
+    a = call_jar("security")
+    print(a)
 
 # RSA+base64加密
 # def pwd_encryptwd(password='hzmcAdmin'):

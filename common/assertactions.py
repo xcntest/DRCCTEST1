@@ -91,6 +91,7 @@ class AssertActions(object):
 
                 with allure.step("response http_code校验"):
                     allure.attach("实际值为", str(k_str))
+
             self.log.debug('断言对象取值:{}'.format(k_str))
             v_str = FuncReplace(v).reflex_variable()
             self.log.debug('期望取值:{}'.format(v_str))
@@ -98,7 +99,7 @@ class AssertActions(object):
                 self._compare_dict_assert(v_str,k_str)
             else:
                 try:
-                    pytest.assume(k_str == v_str)
+                   assert k_str == v_str
                 except AssertionError:
                     raise CaseAssertFailed('断言失败:实际值{} != 期望值{}'.format(k_str, v_str))
 
@@ -120,17 +121,19 @@ class AssertActions(object):
         :param response_dict:
         :return:
         """
-
+        flag = True
+        k_list = set(response_dict.keys())   #实际结果的key集合
         for k,v in except_dict.items():
-            k_list = set(response_dict.keys())
             if k in k_list:
-                try:
-                    self.log.debug("resopnse boby单个断言值为：{},期望值为：{}".format(k,response_dict.ge(k)))
-                    pytest.assume(v == response_dict.get(k))
-                    with allure.step("response body单个值校校验"):
-                        allure.attach("实际值为", str(response_dict.get(k)))
-                except AssertionError:
-                    raise CaseAssertFailed('断言失败:实际值{} != 期望值{}'.format(response_dict.get(k),v))
+                self.log.debug("resopnse boby单个断言值为：{},期望值为：{}".format(v, response_dict.get(k)))
+                if v != response_dict.get(k):
+                   flag = False
+        try:
+            assert flag
+        except AssertionError:
+            raise CaseAssertFailed('断言失败:实际值{} != 期望值{}'.format(except_dict, response_dict))
+
+
 
 
 

@@ -25,7 +25,7 @@ test_case:
       status:
       extract:
       expects:
-          http_code: 2000
+          http_code: 200
           body.code: 100000
           body.message: 成功
           body.result[0]: ${join_sql_result("select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h  where db.id = h.id and h.ip ='192.168.239.121'")|tools.dbopration}
