@@ -1,7 +1,7 @@
 testinfo:
   case_suite: pair_id2825_test
   descrpiton: 容灾检测接口
-  moduel_class: Test2825
+  module_class: Test2825
 premise: ''
 set_up: ''
 tear_down: ''

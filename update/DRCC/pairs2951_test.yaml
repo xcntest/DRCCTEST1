@@ -1,7 +1,7 @@
 testinfo:
   case_suite: pairs2951_test
   descrpiton: 容灾对全局检测接口
-  moduel_class: Test2951
+  module_class: Test2951
 premise: ''
 set_up: ''
 tear_down: ''

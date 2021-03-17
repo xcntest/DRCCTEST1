@@ -1,7 +1,7 @@
 testinfo:
   case_suite: switch_log3067_test
   descrpiton: 获取切换操作日志接口
-  moduel_class: Test3067
+  module_class: Test3067
 premise: ''
 set_up: ''
 tear_down: ''

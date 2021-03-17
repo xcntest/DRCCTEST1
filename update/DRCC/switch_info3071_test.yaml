@@ -1,7 +1,7 @@
 testinfo:
   case_suite: switch_info3071_test
   descrpiton: 获取单个编排基本信息接口
-  moduel_class: Test3071
+  module_class: Test3071
 premise: ''
 set_up: ''
 tear_down: ''

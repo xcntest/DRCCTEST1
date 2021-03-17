@@ -1,7 +1,7 @@
 testinfo:
   case_suite: db2811_test
   descrpiton: 手动添加资产接口
-  moduel_class: Test2811
+  module_class: Test2811
 premise: ''
 set_up: ''
 tear_down: ''

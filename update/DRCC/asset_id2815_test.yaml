@@ -1,7 +1,7 @@
 testinfo:
   case_suite: asset_id2815_test
   descrpiton: 删除资产接口
-  moduel_class: Test2815
+  module_class: Test2815
 premise: ''
 set_up: ''
 tear_down: ''

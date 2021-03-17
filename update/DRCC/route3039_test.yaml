@@ -1,7 +1,7 @@
 testinfo:
   case_suite: route3039_test
   descrpiton: 编排区路由更新
-  moduel_class: Test3039
+  module_class: Test3039
 premise: ''
 set_up: ''
 tear_down: ''

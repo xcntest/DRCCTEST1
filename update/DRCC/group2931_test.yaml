@@ -1,7 +1,7 @@
 testinfo:
   case_suite: group2931_test
   descrpiton: 监控首页资产组列表
-  moduel_class: Test2931
+  module_class: Test2931
 premise: ''
 set_up: ''
 tear_down: ''

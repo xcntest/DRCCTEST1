@@ -1,7 +1,7 @@
 testinfo:
   case_suite: switch_flow3065_test
   descrpiton: 获取切换操作流程状态接口
-  moduel_class: Test3065
+  module_class: Test3065
 premise: ''
 set_up: ''
 tear_down: ''

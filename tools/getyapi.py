@@ -97,7 +97,7 @@ class GetYapi(object):
         #处理要写入yaml的数据
         data_dict["case_suite"] = case_suite  #yaml文件名
         data_dict["descrption"] = pathdata.get("title")  # 接口名称
-        data_dict["modle_class"] = "Test"+ str(self.pathid) # 接口名称case_suite.replace("_",'')+
+        data_dict["module_class"] = "Test"+ str(self.pathid) # 接口名称case_suite.replace("_",'')+
         data_dict["url"] = self.basepath + pathdata.get("path")  # 接口地址
         data_dict["method"] = pathdata.get("method")  # 接口请求方法
         if pathdata.get("req_headers"):
@@ -151,7 +151,7 @@ class GetYapi(object):
         testinfo = {}   #存入test_info
         testinfo["case_suite"] = self.pathdicts.get("case_suite")
         testinfo["descrpiton"] = self.pathdicts.get("descrption")
-        testinfo["moduel_class"] = self.pathdicts.get("modle_class")
+        testinfo["module_class"] = self.pathdicts.get("module_class")
         yaml_data["testinfo"] = testinfo
 
         yaml_data["premise"] = ""

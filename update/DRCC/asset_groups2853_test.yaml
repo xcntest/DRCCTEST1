@@ -1,7 +1,7 @@
 testinfo:
   case_suite: asset_groups2853_test
   descrpiton: 获取资产组列表接口
-  moduel_class: Test2853
+  module_class: Test2853
 premise: ''
 set_up: ''
 tear_down: ''

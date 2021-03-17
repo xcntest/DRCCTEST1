@@ -1,7 +1,7 @@
 testinfo:
   case_suite: detail3021_test
   descrpiton: 拓扑图节点详情接口
-  moduel_class: Test3021
+  module_class: Test3021
 premise: ''
 set_up: ''
 tear_down: ''

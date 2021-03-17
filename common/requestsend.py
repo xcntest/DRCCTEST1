@@ -100,7 +100,7 @@ class Send2Reques:
 
 
 
-if __name__ == '__main__':
-    request_obj = Send2Reques('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/DRCC/dbtest_11.yaml', "test_get_asset_group")
-    response = request_obj.run_case
-    print(response[0].json())
+# if __name__ == '__main__':
+    # request_obj = Send2Reques('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/DRCC/', "test_get_asset_group")
+    # response = request_obj.run_case
+    # print(response[0].json())

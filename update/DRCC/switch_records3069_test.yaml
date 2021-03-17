@@ -1,7 +1,7 @@
 testinfo:
   case_suite: switch_records3069_test
   descrpiton: 获取切换记录列表接口
-  moduel_class: Test3069
+  module_class: Test3069
 premise: ''
 set_up: ''
 tear_down: ''

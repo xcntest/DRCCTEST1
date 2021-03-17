@@ -1,7 +1,7 @@
 testinfo:
   case_suite: pair_id2823_test
   descrpiton: 删除单个容灾资产对
-  moduel_class: Test2823
+  module_class: Test2823
 premise: ''
 set_up: ''
 tear_down: ''

@@ -1,7 +1,7 @@
 testinfo:
   case_suite: group_id3019_test
   descrpiton: 拓扑图接口
-  moduel_class: Test3019
+  module_class: Test3019
 premise: ''
 set_up: ''
 tear_down: ''

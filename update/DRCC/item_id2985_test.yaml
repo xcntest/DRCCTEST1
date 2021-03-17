@@ -1,7 +1,7 @@
 testinfo:
   case_suite: item_id2985_test
   descrpiton: 告警配置控制模板开关接口
-  moduel_class: Test2985
+  module_class: Test2985
 premise: ''
 set_up: ''
 tear_down: ''

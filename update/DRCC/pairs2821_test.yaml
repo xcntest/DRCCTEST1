@@ -1,7 +1,7 @@
 testinfo:
   case_suite: pairs2821_test
   descrpiton: 获取容灾对列表
-  moduel_class: Test2821
+  module_class: Test2821
 premise: ''
 set_up: ''
 tear_down: ''

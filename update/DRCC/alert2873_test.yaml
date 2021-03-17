@@ -1,7 +1,7 @@
 testinfo:
   case_suite: alert2873_test
   descrpiton: 获取告警配置模板信息接口
-  moduel_class: Test2873
+  module_class: Test2873
 premise: ''
 set_up: ''
 tear_down: ''

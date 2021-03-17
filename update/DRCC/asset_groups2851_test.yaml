@@ -1,7 +1,7 @@
 testinfo:
   case_suite: asset_groups2851_test
   descrpiton: 创建资产组信息接口
-  moduel_class: Test2851
+  module_class: Test2851
 premise: ''
 set_up: ''
 tear_down: ''

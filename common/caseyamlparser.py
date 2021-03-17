@@ -119,8 +119,8 @@ class CaseYamlParser:
         return d
 
 
-if __name__ == '__main__':
-    path = os.path.join(config.datapath,"dbtest_11.yaml")
-    a = CaseYamlParser(path)
-    data =  a._proc_body(a.test_case[0].get("params"))
+# if __name__ == '__main__':
+    # path = os.path.join(config.datapath,"")
+    # a = CaseYamlParser(path)
+    # data =  a._proc_body(a.test_case[0].get("params"))
 

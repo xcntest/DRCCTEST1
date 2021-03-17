@@ -6,6 +6,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="tools.AttrDict.AttrDict.*" />
+          <option value="pytest.assume" />
         </list>
       </option>
     </inspection_tool>

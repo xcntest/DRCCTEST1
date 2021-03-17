@@ -1,7 +1,7 @@
 testinfo:
   case_suite: db2817_test
   descrpiton: 获取资产列表接口
-  moduel_class: Test2817
+  module_class: Test2817
 premise: ''
 set_up: ''
 tear_down: ''

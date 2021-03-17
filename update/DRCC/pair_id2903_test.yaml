@@ -1,7 +1,7 @@
 testinfo:
   case_suite: pair_id2903_test
   descrpiton: 单个容灾对关系检测
-  moduel_class: Test2903
+  module_class: Test2903
 premise: ''
 set_up: ''
 tear_down: ''

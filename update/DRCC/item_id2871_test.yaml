@@ -1,7 +1,7 @@
 testinfo:
   case_suite: item_id2871_test
   descrpiton: 告警配置自定义模板删除接口
-  moduel_class: Test2871
+  module_class: Test2871
 premise: ''
 set_up: ''
 tear_down: ''

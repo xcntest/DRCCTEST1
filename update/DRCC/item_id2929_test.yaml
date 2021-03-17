@@ -1,7 +1,7 @@
 testinfo:
   case_suite: item_id2929_test
   descrpiton: 告警配置获取关联容灾对列表接口
-  moduel_class: Test2929
+  module_class: Test2929
 premise: ''
 set_up: ''
 tear_down: ''

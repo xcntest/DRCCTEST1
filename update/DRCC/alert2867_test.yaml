@@ -1,7 +1,7 @@
 testinfo:
   case_suite: alert2867_test
   descrpiton: 告警配置自定义模板创建接口
-  moduel_class: Test2867
+  module_class: Test2867
 premise: ''
 set_up: ''
 tear_down: ''

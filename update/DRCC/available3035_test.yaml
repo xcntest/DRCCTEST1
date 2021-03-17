@@ -1,7 +1,7 @@
 testinfo:
   case_suite: available3035_test
   descrpiton: 候选区容灾对列表
-  moduel_class: Test3035
+  module_class: Test3035
 premise: ''
 set_up: ''
 tear_down: ''

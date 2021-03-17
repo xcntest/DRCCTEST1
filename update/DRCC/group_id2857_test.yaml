@@ -1,7 +1,7 @@
 testinfo:
   case_suite: group_id2857_test
   descrpiton: 查询单个资产组信息接口
-  moduel_class: Test2857
+  module_class: Test2857
 premise: ''
 set_up: ''
 tear_down: ''

@@ -46,7 +46,7 @@ class HadnlerYaml:
         case_data = yaml.safe_load(yaml_test)
         return case_data
 
-
-if __name__ == '__main__':
-      a = "/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/DRCC/dbtest_11.yaml"
-      HadnlerYaml.read_yaml_file(a)
+#
+# if __name__ == '__main__':
+#       # a = "/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/DRCC/"
+#       # HadnlerYaml.read_yaml_file(a)

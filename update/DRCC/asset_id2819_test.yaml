@@ -1,7 +1,7 @@
 testinfo:
   case_suite: asset_id2819_test
   descrpiton: 获取单个资产信息接口
-  moduel_class: Test2819
+  module_class: Test2819
 premise: ''
 set_up: ''
 tear_down: ''

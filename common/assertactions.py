@@ -7,6 +7,7 @@
 '''
 import json
 import re
+import pytest
 import allure
 from common.errors import ResponseNotJson,CaseAssertNotSport,CaseAssertFailed
 from common.logs import MyLog
@@ -77,19 +78,29 @@ class AssertActions(object):
                 raise CaseAssertNotSport
             if mod == 'body':
                 k_str = self.body_assert_parse(k)
+
+                with allure.step("response body校验"):
+                    allure.attach("实际值为", str(k_str))
             elif mod == 'headers':
                 k_str = self.headers_assert_parse(k)
+
+                with allure.step("response head校验"):
+                    allure.attach("实际值为", str(k_str))
             elif mod == 'http_code':
                 k_str = self.http_code_assert_parse(k)
+
+                with allure.step("response http_code校验"):
+                    allure.attach("实际值为", str(k_str))
             self.log.debug('断言对象取值:{}'.format(k_str))
             v_str = FuncReplace(v).reflex_variable()
+            self.log.debug('期望取值:{}'.format(v_str))
             if isinstance(v_str,dict):
                 self._compare_dict_assert(v_str,k_str)
             else:
                 try:
-                    assert k_str == v_str
+                    pytest.assume(k_str == v_str)
                 except AssertionError:
-                    raise CaseAssertFailed('断言失败:{} != {}'.format(k_str, v_str))
+                    raise CaseAssertFailed('断言失败:实际值{} != 期望值{}'.format(k_str, v_str))
 
     def _format_response_body(self):
         try:
@@ -109,24 +120,28 @@ class AssertActions(object):
         :param response_dict:
         :return:
         """
-        with allure.step("断言数据库查询与接口返回是否一致"):
-            for k,v in except_dict.items():
-                print(k)
-                if k in response_dict:
-                    allure.attach("断言对象",k)
-                    allure.attach("期望值",k)
-                    allure.attach("实际值", k)
-                    print("期望值为：{}".format(response_dict.get(k)))
-                    assert v == response_dict.get(k)
+
+        for k,v in except_dict.items():
+            k_list = set(response_dict.keys())
+            if k in k_list:
+                try:
+                    self.log.debug("resopnse boby单个断言值为：{},期望值为：{}".format(k,response_dict.ge(k)))
+                    pytest.assume(v == response_dict.get(k))
+                    with allure.step("response body单个值校校验"):
+                        allure.attach("实际值为", str(response_dict.get(k)))
+                except AssertionError:
+                    raise CaseAssertFailed('断言失败:实际值{} != 期望值{}'.format(response_dict.get(k),v))
 
 
-if __name__ == '__main__':
-    from common.requestsend import Send2Reques
-    sqllist =  ["select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h  where db.id = h.id and h.ip ='192.168.239.120'","select * from account where owner_id ='8'"]
-    request_obj = Send2Reques('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/DRCC/dbtest_11.yaml', "test_get_asset_group")
-    response, except_dict = request_obj.run_case
-    dict_key = {"body.result[0]":"join_sql_result(%s)|common.dbopration" % sqllist}
-    key = "body.result[0]"
-    a = AssertActions(dict_key,response)
-    body_data = a.body_assert_parse(key)
-    print(body_data)
+
+
+# if __name__ == '__main__':
+    # from common.requestsend import Send2Reques
+    # sqllist =  ["select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h  where db.id = h.id and h.ip ='192.168.239.120'","select * from account where owner_id ='8'"]
+    # request_obj = Send2Reques('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/DRCC/', "test_get_asset_group")
+    # response, except_dict = request_obj.run_case
+    # dict_key = {"body.result[0]":"join_sql_result(%s)|common.dbopration" % sqllist}
+    # key = "body.result[0]"
+    # a = AssertActions(dict_key,response)
+    # body_data = a.body_assert_parse(key)
+    # print(body_data)

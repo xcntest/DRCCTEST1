@@ -1,7 +1,7 @@
 testinfo:
   case_suite: precheck_flow3061_test
   descrpiton: 获取切换检查流程状态接口
-  moduel_class: Test3061
+  module_class: Test3061
 premise: ''
 set_up: ''
 tear_down: ''

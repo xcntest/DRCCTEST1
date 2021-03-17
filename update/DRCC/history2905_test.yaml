@@ -1,7 +1,7 @@
 testinfo:
   case_suite: history2905_test
   descrpiton: 告警历史
-  moduel_class: Test2905
+  module_class: Test2905
 premise: ''
 set_up: ''
 tear_down: ''
