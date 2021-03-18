@@ -190,7 +190,7 @@ class GetYapi(object):
 
 
 if __name__ == '__main__':
-    data =  GetYapi(userapi="xiongting@hzmc.com.cn", passwdapi="24totoro-", group_id="12")
+    data =  GetYapi(userapi="***@hzmc.com.cn", passwdapi="***", group_id="12")
     data.create_yaml_by_yapi()
 
 
