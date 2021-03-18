@@ -13,6 +13,7 @@ from tools.encryptpwd import MD5Encrypt
 from tools.AttrDict import AttrDict
 from tools.getvcode import GetVcode
 from common.logs import MyLog
+from tools.encryptpwd import AESEncrypt
 
 
 def login():
@@ -20,10 +21,13 @@ def login():
       #urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
       log = MyLog()
       req_data = {}
-      longinfo = AttrDict(config.longinfo)
-      url = 'https://' +longinfo.url
-      req_data["account"] = '610f73a314e055b4c716058a4cdb09fc'
-      req_data["password"] = 'b26941d9e4143513b4c62a1443a78ee7'
+      loginfo = AttrDict(config.longinfo)
+      url = 'https://' +loginfo.url
+      req_data["account"] = AESEncrypt(loginfo.username)
+      req_data["password"] = AESEncrypt(loginfo.pwd)
+      import jpype
+      if not jpype.isJVMStarted():
+            jpype.shutdownJVM()
       imageCode,imageId = GetVcode().get_vcode()
       headers = {"Conten-Type":"application/json;charset=UTF-8"}
       while True:

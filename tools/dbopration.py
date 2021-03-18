@@ -75,7 +75,7 @@ def join_sql_result(sql):
 
 if __name__ == '__main__':
    sqllist = ["select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h  where db.id = h.id and h.ip ='192.168.239.120'","select * from account where owner_id ='8'"]
-   a = join_sql_result("select * from account where owner_id = '8'")
+   a = join_sql_result("select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h where db.id = h.id and db.name ='11G备239.121'")
    b = join_sql_result(sqllist)
    print("b{}".format(b))
    print("a{}".format(a))

@@ -1,0 +1,40 @@
+testinfo:
+  case_suite: db2811_test
+  descrpiton: 手动添加资产接口
+  module_class: Test2811
+
+premise: ''
+set_up: ''
+tear_down: ''
+
+
+test_case:
+    - test_name: 'test_add_assets_db_normal'
+      info: 正确添加资产
+      mark: ''
+      method: POST
+      url: /api/v1/assets/db
+      headers:
+        Authorization: $token
+      timeout: 8
+      params: {}
+      data: ''
+      files: ''
+      json:
+        db_name: ''
+        asset_type: ''
+        db_type: ''
+        instance: ''
+        db_user: ''
+        db_pwd: ''
+        db_port: ''
+        os_type: ''
+        ip: ''
+        os_conn_type: ''
+        os_user: ''
+        os_pwd: ''
+        os_port: ''
+        group_ids: ''
+      status: ''
+      extract: ''
+      expects: ''

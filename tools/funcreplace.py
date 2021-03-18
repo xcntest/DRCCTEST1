@@ -17,19 +17,11 @@ class FuncReplace:
         self.text = text
         self.logs = MyLog()
 
-    #TODO 后期优化精简代码re模块
+
     def _get_variable(self):
-        """获取${}"""
-        list = []
-        if self.text:
-            fun_str = re.split(";", self.text)   #这里用来分段多个要执行的函数，可能存在字符冲突的情况
-            for sub_str in fun_str:
-                r = re.findall(r"\$\{(.*)\}$", sub_str, re.I | re.M)
-                if r:
-                    list.append(r[0])
-        if not list:
-            self.logs.info("此字符串为正常字符串,替换的字符串为{}".format(self.text))
-        return list
+        r = re.findall(r"\$\{(.*)\}$", self.text, re.I | re.M)
+        if len(r) == 1:
+            return r
 
     def reflex_variable(self):
         text = self.text
@@ -54,6 +46,7 @@ class FuncReplace:
                         # text = str(text).replace(sub_str, str(value))   #返回值替换掉模板内容，要注意返回值格式的问题
                     except ModuleNotFoundError:
                         raise KeywordSyntaxError
+
         return text
 
 
@@ -63,11 +56,13 @@ if __name__ == '__main__':
         "select * from account where owner_id ='8'"]
 
     str1 = """${join_sql_result(%s)|tools.dbopration}""" % sqllist
-    str2 = """${quey_db("select h.ip from host as h ")|tools.dbopration}"""
+    str2 = """${join_sql_result("select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h where db.id = h.id and db.name ='11G备239.121'")|tools.dbopration}"""
     str3 = ""
     str4 = 1000
     str5 = "奇怪的数字"
-    result = FuncReplace(sqllist).reflex_variable()
+    result1 = FuncReplace(str1)._get_variable()
+    result = FuncReplace(str1).reflex_variable()
+    print(result1)
     print(result)
     # import json
     # nos = json.loads(result)

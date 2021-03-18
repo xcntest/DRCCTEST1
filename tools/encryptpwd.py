@@ -24,28 +24,29 @@ def MD5Encrypt(key):
 
 
 
-
-
-def call_jar(content):
+def AESEncrypt(content):
     # 以下三个路径依次：jvm.dll地址、ApiHelper.jar地址
     jvmPath = jpype.getDefaultJVMPath()
-    jarPath = os.path.join(config.root_dir, "lib\AES.jar")
+    jarPath = os.path.join(config.root_dir,"lib/AES.jar")
+
 
     # startJVM("jvm.dll地址", "-ea", "ApiHelper.jar地址", "ApiHelper.jar依赖库文件夹地址")
     # 第四个参数非必填项，有就填，没有就不填
-    jpype.startJVM(jvmPath, "-ea", "-Djava.class.path=%s" % jarPath)
+    #打开JAVA虚拟机
+    if not jpype.isJVMStarted():
+        jpype.startJVM(jvmPath, "-ea", "-Djava.class.path=%s" % jarPath)
 
     JDClass = jpype.JClass("com.hzmc.test.AESForNodejs")
     aesHandler = JDClass()
     test = str(aesHandler.encrypt(content))
-
-    jpype.shutdownJVM()
+    #关闭JAVA虚拟
+    #jpype.shutdownJVM()
 
     return test
 
 
 if __name__ == '__main__':
-    a = call_jar("security")
+    a = AESEncrypt("security")
     print(a)
 
 # RSA+base64加密
@@ -61,9 +62,3 @@ if __name__ == '__main__':
 #         raskey = RSA.importKey(publickey)
 #         cipher = PKCS1_v1_5.new(raskey)
 #         # cipher_text = base64.b64encode(cipher.encrypt(password))
-#         cipher_text = base64.b64encode(cipher.encrypt(bytes(password, 'utf8')))
-#         pravitekey = str(cipher_text, encoding='utf8').replace('+', '%2B')
-#         return pravitekey
-
-if __name__ == '__main__':
-    print(MD5Encrypt("test2"))
