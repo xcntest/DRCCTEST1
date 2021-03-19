@@ -3,7 +3,7 @@ import os
 
 root_dir = os.path.dirname(__file__)
 
-evn = '192.168.51.233'
+evn = '192.168.51.***'
 
 host = evn+":8000"
 
@@ -11,9 +11,9 @@ host = evn+":8000"
 imagepath = os.path.join(root_dir, "images") #默认用例文件路径
 #统一身份登录信息
 longinfo = {
-    "url" :"192.168.51.91:18020",
+    "url" :"192.168.51.***:***",
     "username": "test2",
-    "pwd":"hzmc1234567"
+    "pwd":"***"
 }
 
 
@@ -23,8 +23,8 @@ proc_mysqldb_info = {
     'host': evn,
     'port': 3306,
     'db': 'drcc',
-    'user': 'root',
-    'password': 'root_drcc',
+    'user': '***',
+    'password': '***',
     'charset' : 'utf8'
 }
 #用例数据和用例文件路么
