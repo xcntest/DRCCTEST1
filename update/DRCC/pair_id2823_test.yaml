@@ -1,23 +1,51 @@
 testinfo:
-  case_suite: pair_id2823_test
-  descrpiton: 删除单个容灾资产对
-  module_class: Test2823
-premise: ''
-set_up: ''
-tear_down: ''
+    case_suite: pair_id2823_test
+    descrpiton: 删除单个容灾资产对
+    module_class: Test2823
+
+
+premise:
+#    - test_name:
+#      info: 创建删除用资产
+#      mark: smoking
+#      method: POST
+#      url: /api/v1/asset_groups
+#      headers:
+#        Authorization: $token
+#      timeout: 8
+#      params:
+#      data:
+#      files:
+#      json:
+#        name: 查询资产组用资产组18
+#        desc: 查询资产组用资产组
+#      status:
+#      extract:
+#        deletegroupip: $.result.id
+#      expects:
+
+
+set_up:
+tear_down:
+
+
 test_case:
-- test_name: ''
-  info: 删除单个容灾资产对
-  mark: ''
-  method: DELETE
-  url: /api/v1/assets/db/pairs/:pair_id
-  headers:
-    Authorization: $token
-  timeout: 8
-  params: {}
-  data: ''
-  files: ''
-  json: {}
-  status: ''
-  extract: ''
-  expects: ''
+    - test_name: test_delete_assert_db_succeed
+      info: 成功删除单个容灾资产对
+      mark: smoking
+      method: DELETE
+      url: !join [/api/v1/assets/db/pairs/,53]
+      headers:
+        Authorization: $token
+      timeout: 8
+      params: {}
+      data: ''
+      files: ''
+      json: {}
+      status: ''
+      extract: ''
+      expects:
+        http_code: 200
+        body.code: 100000
+        body.message: 成功
+        body.result: []

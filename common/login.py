@@ -40,6 +40,7 @@ def login():
                   data = response.json()
                   if data["success"]:
                         token = response.json().get("data").get("token")
+                        print(token)
                         return token
                         break
                   else:

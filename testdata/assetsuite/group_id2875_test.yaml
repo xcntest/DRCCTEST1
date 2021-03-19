@@ -1,0 +1,48 @@
+testinfo:
+  case_suite: group_id2875_test
+  descrpiton: 删除资产组接口
+  module_class: Test2875
+premise:
+    - test_name:
+      info: 创建删除用资产组
+      mark:
+      method: POST
+      url: /api/v1/asset_groups
+      headers:
+        Authorization: $token
+      timeout: 8
+      params:
+      data:
+      files:
+      json:
+        name: 查询资产组用资产组18
+        desc: 查询资产组用资产组
+      status:
+      extract:
+        deletegroupip: $.result.id
+      expects:
+
+set_up: ''
+tear_down: ''
+
+test_case:
+    - test_name: test_delete_assert_groups_succeed
+      info: 成功删除资产组接口
+      mark: smoking
+      method: DELETE
+      url: !join [/api/v1/asset_groups/,$deletegroupip]
+      headers:
+        Authorization: $token
+      timeout: 8
+      params: {}
+      data: ''
+      files: ''
+      json: {}
+      status: ''
+      extract: ''
+      expects:
+        http_code: 200
+        body.code: 100000
+        body.message: 成功
+        body.result: {}
+

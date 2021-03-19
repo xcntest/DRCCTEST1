@@ -6,18 +6,18 @@ premise: ''
 set_up: ''
 tear_down: ''
 test_case:
-- test_name: ''
-  info: 删除资产接口
-  mark: ''
-  method: DELETE
-  url: /api/v1/assets/db/:asset_id
-  headers:
-    Authorization: $token
-  timeout: 8
-  params: {}
-  data: ''
-  files: ''
-  json: {}
-  status: ''
-  extract: ''
-  expects: ''
+    - test_name: ''
+      info: 删除资产接口
+      mark: ''
+      method: DELETE
+      url: /api/v1/assets/db/:asset_id
+      headers:
+        Authorization: $token
+      timeout: 8
+      params: {}
+      data: ''
+      files: ''
+      json: {}
+      status: ''
+      extract: ''
+      expects: ''

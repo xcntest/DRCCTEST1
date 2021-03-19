@@ -29,4 +29,4 @@ class AttrDict:
 if __name__ == '__main__':
     d = {'mysql':{'host':'192.168.51.126'}}
     a = AttrDict(d['mysql'])
-    print(a.host)
+    print(type(a))

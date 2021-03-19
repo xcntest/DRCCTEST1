@@ -23,7 +23,8 @@ def call_case(file_path=None):
                 raise CaseFileNotFound
             request_obj = Send2Reques(file_path,func_name)
             response,except_dict = request_obj.run_case   #执行用例,获得resopnse
-            AssertActions(except_dict, response).exec_assert()
+            if except_dict:
+                AssertActions(except_dict, response).exec_assert()   #断言
             return func(*args, **kwargs)
         return wrapper
     return middle

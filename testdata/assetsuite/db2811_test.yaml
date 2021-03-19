@@ -3,38 +3,33 @@ testinfo:
   descrpiton: 手动添加资产接口
   module_class: Test2811
 
-premise: ''
+premise:
 set_up: ''
 tear_down: ''
 
 
 test_case:
-    - test_name: 'test_add_assets_db_normal'
-      info: 正确添加资产
-      mark: ''
+    - test_name: test_add_assert_group
+      info: 创建资产组信息接口
+      mark: smoking
       method: POST
-      url: /api/v1/assets/db
+      url: /api/v1/asset_groups
       headers:
         Authorization: $token
       timeout: 8
-      params: {}
-      data: ''
-      files: ''
+      params:
+      data:
+      files:
       json:
-        db_name: ''
-        asset_type: ''
-        db_type: ''
-        instance: ''
-        db_user: ''
-        db_pwd: ''
-        db_port: ''
-        os_type: ''
-        ip: ''
-        os_conn_type: ''
-        os_user: ''
-        os_pwd: ''
-        os_port: ''
-        group_ids: ''
-      status: ''
-      extract: ''
-      expects: ''
+        name: &name 查询资产组用资产组19
+        desc: 查询资产组用资产组
+      status:
+      extract:
+        groupip: $.result.id
+      expects:
+        http_code: 200
+        body.code: 100000
+        body.message: 成功
+        body.result: !join ['${join_sql_result(','"',
+                            'select ag.id,ag.desc from asset_group as ag where name=',
+                            "'",*name,"'",'"',')|tools.dbopration}']

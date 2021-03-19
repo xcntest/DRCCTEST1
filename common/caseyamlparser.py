@@ -7,6 +7,7 @@
 '''
 
 from tools.AttrDict import AttrDict
+from common.logs import MyLog
 from common.yamlhandler import HadnlerYaml
 from tools.funcreplace import FuncReplace
 from common.errors import CaseStoryNotFound,CaseStoryRepeat,CaseParamsError
@@ -22,10 +23,9 @@ class CaseYamlParser:
         :param yaml_path: yaml_case文件路径
         """
         try:
-            self.yaml_data = HadnlerYaml.read_yaml_file(yaml_path)
+            self.yaml_data = AttrDict(HadnlerYaml.read_yaml_file(yaml_path))
             self.test_info = AttrDict(self.yaml_data.testinfo)
-            self.premise = self.yaml_data.premise    #列表
-            self.test_case = self.yaml_data.test_case  #列表
+            self.logs = MyLog()
         except Exception as a:
             MyLog.error("用例参数错误{}".format(a))
             raise CaseParamsError
@@ -47,6 +47,11 @@ class CaseYamlParser:
         return self.test_info.module_class
 
     @property
+    def get_premise(self):
+        return self.yaml_data.premise   #列表
+
+
+    @property
     def case_set_up(self):
         """获取前置条件方法"""
         return self.yaml_data.set_up
@@ -54,12 +59,12 @@ class CaseYamlParser:
     @property
     def case_tear_down(self):
         """执行后置方法"""
-        return self.yaml_data.tear_down
+        return self.yaml_data.tear_down   #主要是后置删除接口调用
 
     @property
     def get_all_case(self):
         """获取用例"""
-        return self.yaml_data.tear_down
+        return self.yaml_data.test_case
 
 
     def get_case_obj_by_name(self,case_data_list,story_name):
@@ -80,47 +85,55 @@ class CaseYamlParser:
             raise CaseStoryNotFound
         if len(storys) > 1:
             raise CaseStoryRepeat
-        return AttrDict(storys[0])
+        return storys[0]
 
 
 
-    def _proc_body(self,data):
-        #处理有模板替换的body
-        if data:
-            body = {k: FuncReplace(v).reflex_variable() for k, v in (dict(data)).items()}
-        else:
-            body = data
-        return body
+    # def _proc_body(self,data):
+    #     #处理有模板替换的body
+    #     if data:
+    #         body = {k: FuncReplace(v).reflex_variable() for k, v in (dict(data)).items()}
+    #     else:
+    #         body = data
+    #     return body
+    #
+    #
+    #
+    #
+    # def proc_data(self,request_data):
+    #     """
+    #     处理request请求数据,
+    #     :request_data: 经过get_case_obj_by_name处理过的数据
+    #     :return: 返加用于request请求的数据
+    #     """
+    #     #处理请求体，替换换要执行函数的内容
+    #     request_data = AttrDict(request_data)
+    #     try:
+    #         params = self._proc_body(request_data.params)
+    #         data = self._proc_body(request_data.data)
+    #         json = self._proc_body(request_data.json)
+    #     except AttributeError as e:
+    #         self.logs.error("yaml文件内无此参数值，请检查".format(e))
+    #     #封装rquest数据
+    #     d = {
+    #         "method": request_data.method.upper(),
+    #         "url": "http://" +config.host+request_data.url,
+    #         "params": params,
+    #         "data": data,
+    #         "json": json,
+    #         "files":request_data.files,
+    #         "headers": request_data.headers,
+    #         "timeout":request_data.timeout,
+    #         "verify": False
+    #     }
+    #     return d
 
 
-
-    def proc_data(self,request_data):
-        """
-        处理request请求数据,
-        :request_data: 经过get_case_obj_by_name处理过的数据
-        :return: 返加用于request请求的数据
-        """
-        #处理请求体，替换换要执行函数的内容
-        params = self._proc_body(request_data.params)
-        data = self._proc_body(request_data.data)
-        json = self._proc_body(request_data.json)
-        #封装rquest数据
-        d = {
-            "method": request_data.method.upper(),
-            "url": "http://" +config.host+request_data.url,
-            "params": params,
-            "data": data,
-            "json": json,
-            "files":request_data.files,
-            "headers": request_data.headers,
-            "timeout":request_data.timeout,
-            "verify": False
-        }
-        return d
-
-
-# if __name__ == '__main__':
-    # path = os.path.join(config.datapath,"")
-    # a = CaseYamlParser(path)
-    # data =  a._proc_body(a.test_case[0].get("params"))
+if __name__ == '__main__':
+    path = os.path.join(config.datapath,"assetsuite/db2811_test.yaml")
+    a = CaseYamlParser(path)
+    data = a.get_all_case[0]
+    print(data)
+    data1 = a.proc_data(data)
+    print(data1)
 

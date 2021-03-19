@@ -51,18 +51,8 @@ class FuncReplace:
 
 
 if __name__ == '__main__':
-    sqllist = [
-        "select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h  where db.id = h.id and h.ip ='192.168.239.120'",
-        "select * from account where owner_id ='8'"]
-
-    str1 = """${join_sql_result(%s)|tools.dbopration}""" % sqllist
-    str2 = """${join_sql_result("select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h where db.id = h.id and db.name ='11G备239.121'")|tools.dbopration}"""
-    str3 = ""
-    str4 = 1000
-    str5 = "奇怪的数字"
-    result1 = FuncReplace(str1)._get_variable()
-    result = FuncReplace(str1).reflex_variable()
-    print(result1)
+    sql = """${quey_db("select count(*) from db")|tools.dbopration}"""
+    result = FuncReplace(sql).reflex_variable()
     print(result)
     # import json
     # nos = json.loads(result)

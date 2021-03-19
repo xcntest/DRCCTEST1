@@ -1,0 +1,195 @@
+testinfo:
+    case_suite: db2817_test
+    descrpiton: 获取资产列表接口测试
+    module_class: Test2817
+
+premise:
+    - test_name:
+      info: 创建资产组信息接口
+      mark:
+      method: POST
+      url: /api/v1/asset_groups
+      headers:
+        Authorization: $token
+      timeout: 8
+      params:
+      data:
+      files:
+      json:
+        name: 查询资产组用资产组
+        desc: 查询资产组用资产组
+      status:
+      extract:
+            filterdbgroupip: $.result.id
+      expects:
+
+
+    - test_name:
+      info: 添加查询用资产
+      mark:
+      method: POST
+      url: /api/v1/assets/db
+      headers:
+        Authorization: $token
+      timeout: 8
+      params: {}
+      data:
+      files:
+      json:
+        db_name: &name 11G主239.120
+        asset_type: db
+        db_type: 272
+        instance: orcl
+        db_user: system
+        db_pwd: oracle
+        db_port: 1521
+        os_type: 16
+        ip: &ip 192.168.239.120
+        os_conn_type: 16
+        os_user: oracle
+        os_pwd: oracle
+        os_port: 22
+        group_ids: $filterdbgroupip
+      status:
+      extract:
+        filterdbid: $.result.id
+      expects:
+
+
+set_up:
+
+tear_down:
+    - test_name: ''
+      info: 删除查询资产用资产组数据
+      mark: ''
+      method: DELETE
+      url: !join [/api/v1/asset_groups/,$filterdbgroupip]
+      headers:
+        Authorization: $token
+      timeout: 8
+      params:
+      data: ''
+      files: ''
+      json: {}
+      status: ''
+      extract: ''
+      expects: ''
+
+    - test_name: ''
+      info: 删除查询资产用资产数据
+      mark: ''
+      method: DELETE
+      url: !join [/api/v1/assets/db/,$filterdbid]
+      headers:
+        Authorization: $token
+      timeout: 8
+      params: {}
+      data: ''
+      files: ''
+      json: {}
+      status: ''
+      extract: ''
+      expects: ''
+
+
+test_case:
+    - test_name: test_filter_asset_db_by_name #测试用例名称
+      info: 资产列表按name查询精确查询 #allure story描述
+      mark: smoking                    #用例执行等级
+      method: GET
+      url: /api/v1/assets/db
+      headers:
+      timeout: 8
+      params:
+        type: name
+        value: *name
+        page: 1
+        per_page: 10
+        group_id:
+      data:
+      files:
+      json:
+      status:
+      extract:
+      expects:
+          http_code: 200
+          body.code: 100000
+          body.message: 成功
+          body.result[0]: !join ['${join_sql_result(',
+                                 '"','select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h',
+                                 ' where db.id = h.id and db.name =',"'",*name, "'",'"',')|tools.dbopration}']
+
+    - test_name: test_filter_asset_db_by_ip #测试用例名称
+      info: 资产列表按ip查询精确查询 #allure story描述
+      mark: smoking                    #用例执行等级
+      method: GET
+      url: /api/v1/assets/db
+      headers:
+      timeout: 8
+      params:
+        type: name
+        value: *ip
+        page: 1
+        per_page: 10
+        group_id:
+      data:
+      files:
+      json:
+      status:
+      extract:
+      expects:
+          http_code: 200
+          body.code: 100000
+          body.message: 成功
+          body.result[0]: !join ['${join_sql_result(',
+                                 '"','select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h',
+                                 ' where db.id = h.id and db.name =',"'",*ip, "'",'"',')|tools.dbopration}']
+
+    - test_name: test_filter_asset_db_null #测试用例名称
+      info: 资产列表按name查询精确查询 #allure story描述
+      mark: smoking                    #用例执行等级
+      method: GET
+      url: /api/v1/assets/db
+      headers:
+      timeout: 8
+      params:
+        type: ip
+        value: 333333
+        page: 1
+        per_page: 10
+        group_id:
+      data:
+      files:
+      json:
+      status:
+      extract:
+      expects:
+          http_code: 200
+          body.code: 100000
+          body.message: 成功
+          body.result: []
+
+
+    - test_name: test_filter_asset_db_total #测试用例名称
+      info: 资产接口核对总条数
+      mark: smoking                    #用例执行等级
+      method: GET
+      url: /api/v1/assets/db
+      headers:
+      timeout: 8
+      params:
+        type: ip
+        value:
+        page: 1
+        per_page: 100
+        group_id:
+      data:
+      files:
+      json:
+      status:
+      extract:
+      expects:
+        http_code: 200
+        body.code: 100000
+        body.message: 成功
+        body.pager: ${quey_db("select count(*) as total from db")|tools.dbopration}

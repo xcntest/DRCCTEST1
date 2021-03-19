@@ -6,7 +6,6 @@
 @Description:  处理yaml的方法集
 '''
 
-import os
 from tools import AttrDict
 from my_package import yaml
 from common.errors import YamlFormatError
@@ -26,11 +25,11 @@ class HadnlerYaml:
         with open(yaml_path, encoding='utf-8') as cf:
             try:
                 data = yaml.load(cf,Loader=yaml.Loader)
-                print(data)
-                yaml_dada = AttrDict.AttrDict(data)  #交读取的yaml字内属性化
-                return yaml_dada
+                # yaml_dada = AttrDict.AttrDict(data)  #交读取的yaml字内属性化
+                return data
             except yaml.scanner.ScannerError:
                 raise YamlFormatError
+
 
 
     #替换用例内的数据
@@ -48,5 +47,6 @@ class HadnlerYaml:
 
 
 if __name__ == '__main__':
-      a = "/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assetsuite/db2817_test.yaml"
-      HadnlerYaml.read_yaml_file(a)
+      a = "/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assetsuite/db2811_test.yaml"
+      text1 = HadnlerYaml.read_yaml_file(a)
+

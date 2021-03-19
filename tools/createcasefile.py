@@ -29,7 +29,6 @@ class CreateCaseFile:
         for root, dirs, files in os.walk(file_path):
             for file in files:
                 self.path = os.path.join(root,file)
-                print(self.path)
                 self.yaml_data = CaseYamlParser(self.path)
                 self.__create_single_case_suit()
 
@@ -50,23 +49,25 @@ from common.requestsend import Send2Reques
 @allure.feature('{}')
 class {}(object):
 '''.format(suit_desc, case_module_class)
-    #
-    #         fixture_example ='''
-    # request_obj = Send2Reques('{}')
-    #
-    # @classmethod
-    # def setup_class(cls):
-    #     cls.request_obj.set_up_case()
-    #     cls.request_obj.ini_case()
-    #
-    # @classmethod
-    # def teardow_class(cls):
-    #     cls.request_obj.tear_down_case()
-    #     '''.format(self.path)
-    #
-    #         mod_example += fixture_example
+            if self.yaml_data.get_premise:
+                premise_example ='''
+    def setup_class(self):
+        request_obj = Send2Reques('{}')
+        request_obj.ini_case
+    
+            '''.format(self.path,self.path)
+                mod_example += premise_example
+
+            if self.yaml_data.case_tear_down:
+                premise_example = '''
+    def teardow_class(self):
+        request_obj = Send2Reques('{}')
+        request_obj.tear_down_case
+            '''.format(self.path,self.path)
+
+                mod_example += premise_example
             #建测试用例
-            for case in self.yaml_data.test_case:
+            for case in self.yaml_data.get_all_case:
                 case_obj =  AttrDict(case)
                 case_name = case_obj.test_name
                 case_mark = case_obj.mark

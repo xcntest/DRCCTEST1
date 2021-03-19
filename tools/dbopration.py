@@ -43,7 +43,7 @@ def quey_db(sql):
                         result = cursor.fetchall()#获取所有查询结果
                         result_list.append(result[0])
                     except:
-                        log.error("未查询到数据，请检查SQL是否正确")
+                        log.error("未查询到数数据，请求SQL为{}".format(sql))
                 return result_list
             else:
                 try:
@@ -51,7 +51,7 @@ def quey_db(sql):
                     result = cursor.fetchall()  # 获取所有查询结果
                     return result
                 except:
-                    log.error("未查询到数据，请检查SQL是否正确")
+                    log.error("未查询到数数据，请求SQL为{}".format(sql))
     conn.close()
 
 
