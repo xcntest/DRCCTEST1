@@ -19,7 +19,14 @@ class Constructdata:
     def _proc_body(self,data):
         #处理有模板替换的body
         if data:
-            body = {k: FuncReplace(v).reflex_variable() for k, v in (dict(data)).items()}
+            body = {}
+            # body = {k: FuncReplace(v).reflex_variable() for k, v in (dict(data)).items()}
+            for k,v in (dict(data)).items():
+                if isinstance(v,list):
+                    v[0] = int(FuncReplace(v[0]).reflex_variable())   #这里是为了处理groupids被模板替换后成了一个字符型
+                    body[k] = v
+                else:
+                    body[k] = FuncReplace(v).reflex_variable()
         else:
             body = data
         return body

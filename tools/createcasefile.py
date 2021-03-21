@@ -33,10 +33,12 @@ class CreateCaseFile:
                 self.__create_single_case_suit()
 
     # 创建用例文档
+    #TODO 可以增加@pytest.mark.run(order)方法的添加
     def __create_single_case_suit(self):
             file_name = self.yaml_data.test_suite + '.py'
             case_file_name = os.path.join(self.case_path, file_name) #默认从配置文件取，但传入就显示传入值
-            import_ = """from common.callcase import call_case
+            import_ = """# -*- coding:utf-8 -*-
+from common.callcase import call_case
 import allure
 import pytest
 from common.requestsend import Send2Reques 
@@ -60,7 +62,7 @@ class {}(object):
 
             if self.yaml_data.case_tear_down:
                 premise_example = '''
-    def teardow_class(self):
+    def teardown_class(self):
         request_obj = Send2Reques('{}')
         request_obj.tear_down_case
             '''.format(self.path,self.path)

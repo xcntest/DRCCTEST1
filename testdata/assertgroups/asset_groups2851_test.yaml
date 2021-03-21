@@ -1,11 +1,28 @@
 testinfo:
-  case_suite: db2811_test
-  descrpiton: 手动添加资产接口
-  module_class: Test2811
+    case_suite: asset_groups2851_test
+    descrpiton: 创建资产组信息接口
+    module_class: Test2851
 
-premise:
+premise: ''
 set_up: ''
-tear_down: ''
+
+
+tear_down:
+    - test_name:
+      info: 新增资产组接口数据回收
+      mark: smoking
+      method: DELETE
+      url: !join [/api/v1/asset_groups/,$addgroupip]
+      headers:
+        Authorization: $token
+      timeout: 8
+      params: {}
+      data: ''
+      files: ''
+      json: {}
+      status: ''
+      extract: ''
+      expects:
 
 
 test_case:
@@ -25,7 +42,7 @@ test_case:
         desc: 查询资产组用资产组
       status:
       extract:
-        groupip: $.result.id
+        addgroupip: $.result.id
       expects:
         http_code: 200
         body.code: 100000

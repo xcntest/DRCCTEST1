@@ -70,6 +70,7 @@ class AssertActions(object):
         else:
             raise CaseAssertNotSport
 
+    #TODO 加入数据库状态断言
     def exec_assert(self):
         for k, v in self.asserts_dict.items():
             self.log.debug('断言对象:{}'.format(k))
@@ -78,20 +79,10 @@ class AssertActions(object):
                 raise CaseAssertNotSport
             if mod == 'body':
                 k_str = self.body_assert_parse(k)
-
-                with allure.step("response body校验"):
-                    allure.attach("实际值为", str(k_str))
             elif mod == 'headers':
                 k_str = self.headers_assert_parse(k)
-
-                with allure.step("response head校验"):
-                    allure.attach("实际值为", str(k_str))
             elif mod == 'http_code':
                 k_str = self.http_code_assert_parse(k)
-
-                with allure.step("response http_code校验"):
-                    allure.attach("实际值为", str(k_str))
-
             self.log.debug('断言对象取值:{}'.format(k_str))
             v_str = FuncReplace(v).reflex_variable()
             self.log.debug('期望取值:{}'.format(v_str))
@@ -125,7 +116,7 @@ class AssertActions(object):
         k_list = set(response_dict.keys())   #实际结果的key集合
         for k,v in except_dict.items():
             if k in k_list:
-                self.log.debug("resopnse boby单个断言值为：{},期望值为：{}".format(v, response_dict.get(k)))
+                self.log.debug("resopnse boby断言key为：{}，实际值为：{},期望值为：{}".format(k,v, response_dict.get(k)))
                 if v != response_dict.get(k):
                    flag = False
         try:

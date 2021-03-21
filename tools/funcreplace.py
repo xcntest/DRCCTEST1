@@ -51,7 +51,7 @@ class FuncReplace:
 
 
 if __name__ == '__main__':
-    sql = """${quey_db("select count(*) from db")|tools.dbopration}"""
+    sql = '${str2int(79)|tools.typechange}'
     result = FuncReplace(sql).reflex_variable()
     print(result)
     # import json

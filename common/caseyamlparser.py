@@ -130,7 +130,7 @@ class CaseYamlParser:
 
 
 if __name__ == '__main__':
-    path = os.path.join(config.datapath,"assetsuite/db2811_test.yaml")
+    path = os.path.join(config.datapath,"assetsuite/")
     a = CaseYamlParser(path)
     data = a.get_all_case[0]
     print(data)

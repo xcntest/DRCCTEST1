@@ -1,0 +1,57 @@
+testinfo:
+  case_suite: db2811_test
+  descrpiton: 手动添加资产接口
+  module_class: Test2811
+
+premise:
+set_up:
+tear_down:
+
+
+test_case:
+    - test_name: test_add_assert_db
+      info: 手动添加资产接口
+      mark: smoking
+      method: POST
+      url: /api/v1/assets/db
+      headers:
+        Authorization: $token
+      timeout: 15
+      params: {}
+      data: ''
+      files: ''
+      json:
+          db_name: &name 11g主239.120
+          asset_type: db
+          db_type: 272
+          instance: orcl
+          db_user: system
+          db_pwd: oracle
+          db_port: 1521
+          os_type: 16
+          ip: &ip 192.168.239.120
+          os_conn_type: 16
+          os_user: oracle
+          os_pwd: oracle
+          os_port: 22
+          group_ids: [3]
+      status: ''
+      extract: ''
+      expects:
+          http_code: 200
+          body.code: 100000
+          body.message: 成功
+          body.result: !join ['${join_sql_result(','[',
+                                 '"','select a.id,a.cmdb_id,a.name as db_name,a.db_type,a.instance,a.status as db_status,a.port as db_port,a.dbversion,a.deleted from drcc.db as a where a.name = ',
+                                "'",*name,"'",'"',',',
+                                '"','select h.os_type,h.ip,h.status as host_status from host as h where h.ip = ',
+                                "'",*ip,"'",'"',',',
+                                '"',"select owner_type as asset_type,name as db_user from account where owner_type='db' and owner_id = (select id from db where name = ",
+                                "'",*name,"'",')",',
+                                '"',"select conn as os_conn_type,port as os_port,name as os_user from account where owner_type='host' and owner_id = (select id from db where name = ",
+                                "'",*name,"'",')"',
+                                '])|tools.dbopration}']
+
+          body.result.group_ids: !join ['${get_value_only(','"',
+          'select group_id as group_ids from asset_group_relation  where owner_id = (select id from db where name = ',
+          "'",*name,"'",')")|tools.dbopration}']

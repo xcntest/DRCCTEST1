@@ -1,10 +1,11 @@
 testinfo:
   case_suite: group_id2875_test
-  descrpiton: 删除资产组接口
+  descrpiton: 删除资产组接口测试套件
   module_class: Test2875
+
 premise:
     - test_name:
-      info: 创建删除用资产组
+      info: 删除资产组接口用资产组
       mark:
       method: POST
       url: /api/v1/asset_groups
@@ -15,15 +16,18 @@ premise:
       data:
       files:
       json:
-        name: 查询资产组用资产组18
-        desc: 查询资产组用资产组
+        name: 删除资产接口用资产组
+        desc: 删除资产接口用资产组
       status:
       extract:
         deletegroupip: $.result.id
       expects:
 
+
 set_up: ''
 tear_down: ''
+
+
 
 test_case:
     - test_name: test_delete_assert_groups_succeed

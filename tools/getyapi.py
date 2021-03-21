@@ -41,7 +41,7 @@ class GetYapi(object):
         loginheader = {'Content-Type': 'application/json;charset=utf-8'}
         #登录
         res = self.session.post(url=self.apiurl + "/api/user/login", json=self.data,verify=False, headers=loginheader)
-        self.logs.info("登录yapi结果{}".format(res.json().get("errmsg")))
+        self.logs.info("登录yapi结果：{}".format(res.json().get("errmsg")))
         #登录后爬取yaml数据
 
 
@@ -190,7 +190,7 @@ class GetYapi(object):
 
 
 if __name__ == '__main__':
-    data =  GetYapi(userapi="xiongting@hzmc.com.cn", passwdapi="123totoro", group_id="12")
+    data =  GetYapi(userapi="xiongting@hzmc.com.cn", passwdapi="24totoro-", group_id="12")
     data.create_yaml_by_yapi()
 
 

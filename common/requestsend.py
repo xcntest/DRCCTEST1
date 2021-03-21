@@ -29,7 +29,6 @@ def sendrequest(case_data):
     :param case_data: case数据字典
     :return:
     """
-    log.debug("传入case值参数为{}".format(case_data))
     log.debug("替换模板的字典为{}".format(extractinfo))
     case_data_replace = HadnlerYaml.replace_yaml_value(case_data,extractinfo)
     request_data = Constructdata().proc_data(case_data_replace) #获取request_body请求数据
@@ -49,7 +48,7 @@ def sendrequest(case_data):
         # 将下个接口需要的关联参数写入到公共参数字典内
         if case_data.get("extract"):
             for key,value in case_data.get("extract").items():
-                extractinfo[key] = jsonpath.jsonpath(response.json(),value)[0]
+                extractinfo[key] = jsonpath.jsonpath(response.json(),value)[0]  #获取到的关联参数变为INT类型，这里可能导致一至错误
                 log.info("所取得的关联参数为{}".format(extractinfo[key]))
         else:
             log.info("该接口无关联参数")
@@ -97,6 +96,7 @@ class Send2Reques:
     @property
     def tear_down_case(self):
         """前置条件处理，获得内容"""
+        log.info("开始执行后置回收数据操作")
         if self.case_obj.case_tear_down:
             for teardown_request_data in self.case_obj.case_tear_down:
                 try:
@@ -155,7 +155,7 @@ class Send2Reques:
 
 
 if __name__ == '__main__':
-    request_obj = Send2Reques('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assetsuite/db2811_test.yaml','test_add_assert_group')
+    request_obj = Send2Reques('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assetsuite/','test_add_assert_group')
     response, except_dict = request_obj.run_case
     print(response.status_code)
 

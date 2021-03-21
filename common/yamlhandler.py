@@ -47,6 +47,6 @@ class HadnlerYaml:
 
 
 if __name__ == '__main__':
-      a = "/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assetsuite/db2811_test.yaml"
+      a = "/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assetsuite/"
       text1 = HadnlerYaml.read_yaml_file(a)
 

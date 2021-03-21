@@ -6,19 +6,17 @@
 @Description:
 '''
 
-import click
 import pytest
 import os
 from tools.createcasefile import CreateCaseFile
-import sys
-from tools import getyapi
+
 
 
 
 if __name__ == '__main__':
     CreateCaseFile().create_temp_case_file()
-    pytest.main(['-s', '-q', '--alluredir', './result/'])
-    os.system("allure generate ./result/ -o ./allure-report/ --clean")
+    # pytest.main(['-s', '-q', '--alluredir', './result/'])
+    # os.system("allure generate ./result/ -o ./allure-report/ --clean")
     # os.system("allure open -h 127.0.0.1 -p 8883 ./allure-report/")
 
 
