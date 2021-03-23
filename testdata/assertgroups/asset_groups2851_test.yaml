@@ -1,6 +1,6 @@
 testinfo:
     case_suite: asset_groups2851_test
-    descrpiton: 创建资产组信息接口
+    descrpiton: 创建资产组信息接口测试套件
     module_class: Test2851
 
 premise: ''
@@ -8,6 +8,7 @@ set_up: ''
 
 
 tear_down:
+   #删除资产组
     - test_name:
       info: 新增资产组接口数据回收
       mark: smoking
@@ -26,6 +27,7 @@ tear_down:
 
 
 test_case:
+    #新建资产组
     - test_name: test_add_assert_group
       info: 创建资产组信息接口
       mark: smoking

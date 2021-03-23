@@ -23,12 +23,16 @@ extractinfo["token"] = "DRCC {}".format(login())
 log = MyLog()
 
 #直接调用的是session接口
-def sendrequest(case_data):
+def sendrequest(case_data,setupdata=None):
     """
 
     :param case_data: case数据字典
     :return:
     """
+    #处理如果请求要先查询库获取值的，传入值
+    if setupdata:
+        for k,v in setupdata.items():
+            extractinfo[k] = v
     log.debug("替换模板的字典为{}".format(extractinfo))
     case_data_replace = HadnlerYaml.replace_yaml_value(case_data,extractinfo)
     request_data = Constructdata().proc_data(case_data_replace) #获取request_body请求数据
@@ -113,7 +117,7 @@ class Send2Reques:
         """处理前置接口,获取关联参数"""
         if self.case_obj.get_all_case:
             case_request_data = self.case_obj.get_case_obj_by_name(self.case_obj.get_all_case,self.case_name)#获取测试数据，字典格式
-            response = sendrequest(case_request_data)  #获取reponse
+            response = sendrequest(case_request_data,self.set_up_case)  #获取reponse
             except_dict = case_request_data["expects"]  #获取期望字典
             return  response,except_dict
 

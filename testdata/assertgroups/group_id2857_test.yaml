@@ -1,0 +1,29 @@
+testinfo:
+  case_suite: group_id2857_test
+  descrpiton: 查询单个资产组信息接口
+  module_class: Test2857
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+    - test_name: test_get_single_groupinfo
+      info: 获取单个资产组列表接口
+      mark: smoking
+      method: GET
+      url: !join [/api/v1/asset_groups/,5]
+      headers:
+        Authorization: $token
+      timeout: 8
+      params:
+        page: ''
+        per_page: ''
+      data: ''
+      files: ''
+      json: {}
+      status: ''
+      extract: ''
+      expects:
+          http_code: 200
+          body.code: 100000
+          body.message: 成功
+          body.result: !join ['${join_sql_result("select ag.name,ag.desc from asset_group as ag  where id =',5,'")|tools.dbopration}']

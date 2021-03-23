@@ -1,0 +1,76 @@
+testinfo:
+  case_suite: asset_id2813_test
+  descrpiton: 资产配置接口
+  module_class: Test2813
+premise: ''
+set_up: ''
+tear_down: ''
+test_case:
+    #原信息提交
+    - test_name: test_modif_not
+      info: 原信息提交
+      mark: smoking
+      method: PUT
+      url: !join [/api/v1/assets/db/,5]
+      headers:
+        Authorization: $token
+      timeout: 40
+      params: {}
+      data: ''
+      files: ''
+      json:
+          asset_type: db
+          db_name: 19C主修改
+          db_type: 272
+          instance: ora19c
+          db_user: system
+          db_pwd: oracle
+          db_port: 1521
+          os_type: 16
+          ip: 192.168.239.231
+          os_conn_type: 16
+          os_user: oracle
+          os_pwd: oracle
+          os_port: 22
+          group_ids: [5]
+      status: ''
+      extract: ''
+      expects:
+          http_code: 200
+          body.code: 100000
+          body.message: 成功
+
+    #修改资产名称
+    - test_name: test_modif_name
+      info: 修改资产名称
+      mark: smoking
+      method: PUT
+      url: !join [/api/v1/assets/db/,5]
+      headers:
+        Authorization: $token
+      timeout: 40
+      params: {}
+      data: ''
+      files: ''
+      json:
+        asset_type: db
+        db_name: 19C主239.231
+        db_type: 272
+        instance: ora19c
+        db_user: system
+        db_pwd: oracle
+        db_port: 1521
+        os_type: 16
+        ip: 192.168.239.231
+        os_conn_type: 16
+        os_user: oracle
+        os_pwd: oracle
+        os_port: 22
+        group_ids: [5]
+      status: ''
+      extract: ''
+      expects:
+        http_code: 200
+        body.code: 100000
+        body.message: 成功
+        body.result.db_name: !join ['${get_value_only("select name as db_name from db where id =',5,'")|tools.dbopration}']

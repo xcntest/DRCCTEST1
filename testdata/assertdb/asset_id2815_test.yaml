@@ -1,8 +1,9 @@
 testinfo:
   case_suite: asset_id2815_test
-  descrpiton: 删除资产接口
+  descrpiton: 删除资产接口测试套件
   module_class: Test2815
 premise:
+    #新增资产组
     - test_name:
       info: 添加删除资产用资产组
       mark:
@@ -21,7 +22,7 @@ premise:
       extract:
          deldb4group: $.result.id
       expects:
-
+    #新增资产
     - test_name:
       info: 手动添加删除用资产
       mark:
@@ -53,9 +54,9 @@ premise:
           deldb4assert: $.result.id
       expects:
 
-
 set_up:
 tear_down:
+    #删除资产组
     - test_name:
       info: 删除资产组--删除资产接口处
       mark:
@@ -74,8 +75,9 @@ tear_down:
 
 
 test_case:
+    #无容灾对无切换编排删除资产
     - test_name: test_assert_deleted_succeed
-      info: 删除资产接口
+      info: 无容灾对无切换编排删除资产
       mark: smoking
       method: DELETE
       url: !join [/api/v1/assets/db/,$deldb4assert]

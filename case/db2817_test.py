@@ -5,7 +5,7 @@ import pytest
 from common.requestsend import Send2Reques 
         
         
-@allure.feature('获取资产列表接口测试')
+@allure.feature('获取资产列表接口测试套件')
 class Test2817(object):
 
     def setup_class(self):
@@ -29,13 +29,13 @@ class Test2817(object):
     def test_filter_asset_db_by_ip(self):
         pass
         
-    @allure.story('资产列表按name查询精确查询')
+    @allure.story('资产列表空查询check')
     @pytest.mark.smoking
     @call_case('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assertdb/db2817_test.yaml')
     def test_filter_asset_db_null(self):
         pass
         
-    @allure.story('资产接口核对总条数')
+    @allure.story('资产列表总条数check')
     @pytest.mark.smoking
     @call_case('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assertdb/db2817_test.yaml')
     def test_filter_asset_db_total(self):

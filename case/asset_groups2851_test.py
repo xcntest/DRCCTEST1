@@ -5,7 +5,7 @@ import pytest
 from common.requestsend import Send2Reques 
         
         
-@allure.feature('创建资产组信息接口')
+@allure.feature('创建资产组信息接口测试套件')
 class Test2851(object):
 
     def teardown_class(self):

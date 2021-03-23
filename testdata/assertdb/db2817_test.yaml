@@ -1,9 +1,11 @@
+#联调未完成
 testinfo:
     case_suite: db2817_test
-    descrpiton: 获取资产列表接口测试
+    descrpiton: 获取资产列表接口测试套件
     module_class: Test2817
 
 premise:
+    #创建资产组信息接口
     - test_name:
       info: 创建资产组信息接口
       mark:
@@ -23,7 +25,7 @@ premise:
             filterdbgroupip: $.result.id
       expects:
 
-
+    #添加查询用资产
     - test_name:
       info: 添加查询用资产
       mark:
@@ -57,8 +59,8 @@ premise:
 
 
 set_up:
-
 tear_down:
+    # 删除查询资产用资产组数据
     - test_name: ''
       info: 删除查询资产用资产组数据
       mark: ''
@@ -75,6 +77,7 @@ tear_down:
       extract: ''
       expects: ''
 
+   #删除查询资产用资产数据
     - test_name: ''
       info: 删除查询资产用资产数据
       mark: ''
@@ -93,6 +96,7 @@ tear_down:
 
 
 test_case:
+    #资产列表按name查询精确查询
     - test_name: test_filter_asset_db_by_name #测试用例名称
       info: 资产列表按name查询精确查询 #allure story描述
       mark: smoking                    #用例执行等级
@@ -119,6 +123,7 @@ test_case:
                                  '"','select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h',
                                  ' where db.id = h.id and db.name =',"'",*name, "'",'"',')|tools.dbopration}']
 
+    #资产列表按ip查询精确查询
     - test_name: test_filter_asset_db_by_ip #测试用例名称
       info: 资产列表按ip查询精确查询 #allure story描述
       mark: smoking                    #用例执行等级
@@ -145,8 +150,9 @@ test_case:
                                  '"','select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h',
                                  ' where db.id = h.id and db.name =',"'",*ip, "'",'"',')|tools.dbopration}']
 
+    #资产列表空查询check
     - test_name: test_filter_asset_db_null #测试用例名称
-      info: 资产列表按name查询精确查询 #allure story描述
+      info: 资产列表空查询check #allure story描述
       mark: smoking                    #用例执行等级
       method: GET
       url: /api/v1/assets/db
@@ -169,9 +175,9 @@ test_case:
           body.message: 成功
           body.result: []
 
-
+    #资产列表总条数check
     - test_name: test_filter_asset_db_total #测试用例名称
-      info: 资产接口核对总条数
+      info: 资产列表总条数check
       mark: smoking                    #用例执行等级
       method: GET
       url: /api/v1/assets/db
@@ -192,4 +198,4 @@ test_case:
         http_code: 200
         body.code: 100000
         body.message: 成功
-        body.pager: ${quey_db("select count(*) as total from db")|tools.dbopration}
+        body.pager: ${join_sql_result("select count(*) as total from db")|tools.dbopration}

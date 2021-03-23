@@ -25,7 +25,7 @@ def conn_db():
 
 
 #TODO 优化方法
-def quey_db(sql):
+def query_db(sql):
     """
     查询数据库
     :param sqlinfo:sql
@@ -58,11 +58,11 @@ def quey_db(sql):
 
 def join_sql_result(sql):
     """
-    拼接查询结果成为一个大字典
+    拼接查询结果成为一个大字典r
     :param sql: sql list 或者直接是sql
     :return:
     """
-    result_list = quey_db(sql)
+    result_list = query_db(sql)
     result_dict = {}
     for sub_result in result_list:
         result_dict.update(sub_result)
@@ -73,23 +73,26 @@ def get_value_only(sql):
     """
     只取查询结果的值
     :param sql:
-    :return: 列表
+    :return: 列表或者具体的值
     """
-    list = []
-    result_list = quey_db(sql)
-    for i in result_list:
-        for k,v in i.items():
-            list.append(v)
-    return list
+    result_list = query_db(sql)
+    if len(result_list)==1:
+        for k, v in result_list[0].items():
+            return v
+    else:
+        list = [v for i in result_list for k,v in i.items()]
+        return list
 
 
 
 
 if __name__ == '__main__':
    sql = "select group_id as group_ids from asset_group_relation  where owner_id = 1"
-   sqllist = ["select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h  where db.id = h.id and h.ip ='192.168.239.120'","select * from account where owner_id ='8'"]
-   a = join_sql_result("select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h where db.id = h.id and db.name ='11G备239.121'")
-   b = join_sql_result(sqllist)
-   c = get_value_only(sql)
-   print(c)
+   sql2 = "select asset_pair_id as pair_id from host where id =7"
+   # sqllist = ["select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h  where db.id = h.id and h.ip ='192.168.239.120'","select * from account where owner_id ='8'"]
+   # a = join_sql_result("select db.id,db.cmdb_id,db.name as db_name,db.db_type,db.instance,db.status as db_status,db.deleted,db.dbversion,h.os_type as os_type,ip,h.status as host_status from db,host as h where db.id = h.id and db.name ='11G备239.121'")
+   # b = join_sql_result(sqllist)
+   b = query_db(sql2)
+   c = join_sql_result(sql2)
+   print(b)
 

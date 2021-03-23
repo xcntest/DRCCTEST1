@@ -1,0 +1,76 @@
+testinfo:
+  case_suite: group_id2855_test
+  descrpiton: 更新单个资产组信息接口
+  module_class: Test2855
+
+premise:
+set_up:
+tear_down:
+
+test_case:
+      #更新资产组名称
+      - test_name: test_modify_group_name
+        info: 更新资产组名称
+        mark: smoking
+        method: PUT
+        url: !join [/api/v1/asset_groups/,56]
+        headers:
+            Authorization: $token
+        timeout: 8
+        params: {}
+        data:
+        files:
+        json:
+            name: ID为5资产修改
+            desc: ID为5资产修改
+        status:
+        expects:
+            http_code: 200
+            body.code: 100000
+            body.message: 成功
+            body.result: !join ['${join_sql_result("select ag.name,ag.desc from asset_group as ag  where id =',56,'")|tools.dbopration}']
+
+     #更新资产组描述
+      - test_name: test_modify_group_desc
+        info: 更新资产组描述
+        mark: smoking
+        method: PUT
+        url: !join [/api/v1/asset_groups/,56]
+        headers:
+            Authorization: $token
+        timeout: 8
+        params: {}
+        data:
+        files:
+        json:
+            name: ID为5资产修改
+            desc: ID为5修改描述
+        status:
+        expects:
+            http_code: 200
+            body.code: 100000
+            body.message: 成功
+            body.result: !join ['${join_sql_result("select ag.desc from asset_group as ag  where id =',56,'")|tools.dbopration}']
+
+     #不更新直接提交
+      - test_name: test_modify_group_info_not
+        info: 不更新信息直接提交
+        mark: smoking
+        method: PUT
+        url: !join [/api/v1/asset_groups/,56]
+        headers:
+            Authorization: $token
+        timeout: 8
+        params: {}
+        data:
+        files:
+        json:
+            name: ID为5资产修改
+            desc: ID为5修改描述
+        status:
+        expects:
+            http_code: 200
+            body.code: 100000
+            body.message: 成功
+            body.result: !join ['${join_sql_result("select ag.name,ag.desc from asset_group as ag  where id =',56,'")|tools.dbopration}']
+

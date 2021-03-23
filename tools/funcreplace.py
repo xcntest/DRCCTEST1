@@ -51,7 +51,7 @@ class FuncReplace:
 
 
 if __name__ == '__main__':
-    sql = '${str2int(79)|tools.typechange}'
+    sql = 'url/api/v1/assets/db/pairs/${get_value_only("select asset_pair_id as pair_id from asset_relation where asset_id =7")|tools.dbopration}'
     result = FuncReplace(sql).reflex_variable()
     print(result)
     # import json

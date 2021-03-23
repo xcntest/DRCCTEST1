@@ -39,7 +39,9 @@ class Constructdata:
         :return: 返加用于request请求的数据
         """
         #处理请求体，替换换要执行函数的内容
+
         request_data = AttrDict(request_data)
+        self.logs.debug("请求转入url{}".format(request_data.url))
         try:
             params = self._proc_body(request_data.params)
             data = self._proc_body(request_data.data)

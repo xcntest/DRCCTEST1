@@ -1,0 +1,41 @@
+#调试通过，要参数化和前后置接口的写入
+testinfo:
+  case_suite: pair_id2903_test
+  descrpiton: 单个容灾对关系检测
+  module_class: Test2903
+
+premise:
+set_up: !join ['${join_sql_result("select asset_pair_id as pairid from asset_relation where asset_id =',7,'")|tools.dbopration}']
+tear_down:
+
+test_case:
+      - test_name: test_single_DR_info
+        info: 单个容灾对关系检测
+        mark: smoking
+        method: PUT
+        url: !join [/api/v1/assets/db/pairs/,$pairid]
+        headers:
+          Authorization: $token
+        timeout: 8
+        params: {}
+        data:
+        files:
+        json: {}
+        status:
+        extract:
+        expects:
+            http_code: 200
+            body.code: 100000
+            body.message: 成功
+            body.result.groups[0].id: 5
+            body.result.pair_id: !join ['${get_value_only("select asset_pair_id as pair_id from asset_relation where asset_id =',7,'")|tools.dbopration}']
+            body.result.source_assets[0].ip: !join ['${get_value_only("select ip from host where id =',8,'")|tools.dbopration}']
+            body.result.source_type: !join ['${get_value_only("select db_type as source_type from db where id =',8,'")|tools.dbopration}']
+            body.result.status: !join ['${get_value_only("','select status from asset_pair where id = (select asset_pair_id from asset_relation where asset_id = ',7,')")|tools.dbopration}']
+            body.result.sync_mode: DG
+            body.result.target_assets[0].ip: !join ['${get_value_only("select ip from host where id =',7,'")|tools.dbopration}']
+            body.result.target_type: !join ['${get_value_only("select db_type as target_type from db where id =',7,'")|tools.dbopration}']
+
+
+
+
