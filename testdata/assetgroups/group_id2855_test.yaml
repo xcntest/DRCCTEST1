@@ -2,6 +2,9 @@ testinfo:
   case_suite: group_id2855_test
   descrpiton: 更新单个资产组信息接口
   module_class: Test2855
+  rep_value: assert_db
+
+
 
 premise:
 set_up:

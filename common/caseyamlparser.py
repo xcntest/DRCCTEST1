@@ -7,9 +7,7 @@
 '''
 
 from tools.AttrDict import AttrDict
-from common.logs import MyLog
 from common.yamlhandler import HadnlerYaml
-from tools.funcreplace import FuncReplace
 from common.errors import CaseStoryNotFound,CaseStoryRepeat,CaseParamsError
 from common.logs import MyLog
 #用于测试,可删除
@@ -18,16 +16,20 @@ import os
 
 class CaseYamlParser:
     """ 用例数据解析器 """
-    def __init__(self, yaml_path):
+    def __init__(self, yaml_path,rep_dict=None):
         """
         :param yaml_path: yaml_case文件路径
         """
         try:
-            self.yaml_data = AttrDict(HadnlerYaml.read_yaml_file(yaml_path))
+            self.source_data = HadnlerYaml.read_yaml_file(yaml_path)   #获取yaml原始数据
+            if rep_dict:
+                self.yaml_data = AttrDict(HadnlerYaml.replace_yaml_value(self.source_data,rep_dict))  #如果rep_dict不为空，则替换
+            else:
+                self.yaml_data = AttrDict(self.source_data)
             self.test_info = AttrDict(self.yaml_data.testinfo)
             self.logs = MyLog()
         except Exception as a:
-            MyLog.error("用例参数错误{}".format(a))
+            self.logs.error("用例参数错误{}".format(a))
             raise CaseParamsError
 
 
@@ -42,6 +44,11 @@ class CaseYamlParser:
         return self.test_info.descrpiton
 
     @property
+    def get_rep_value(self):
+        """获取替换字典"""
+        return self.test_info.rep_value
+
+    @property
     def case_module_class(self):
         """获取测试用例名称"""
         return self.test_info.module_class
@@ -49,6 +56,7 @@ class CaseYamlParser:
     @property
     def get_premise(self):
         return self.yaml_data.premise   #列表
+
 
 
     @property
@@ -130,10 +138,7 @@ class CaseYamlParser:
 
 
 if __name__ == '__main__':
-    path = os.path.join(config.datapath,"assetsuite/")
+    path = os.path.join(config.datapath,"assetdb/asset_id2813_test.yaml")
     a = CaseYamlParser(path)
-    data = a.get_all_case[0]
-    print(data)
-    data1 = a.proc_data(data)
-    print(data1)
+    print(a.get_rep_value)
 

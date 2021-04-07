@@ -2,6 +2,9 @@ testinfo:
   case_suite: asset_id2813_test
   descrpiton: 资产配置接口
   module_class: Test2813
+  rep_value:
+
+
 premise: ''
 set_up: ''
 tear_down: ''

@@ -2,6 +2,9 @@ testinfo:
   case_suite: asset_id2815_test
   descrpiton: 删除资产接口测试套件
   module_class: Test2815
+  rep_value: assert_db
+
+
 premise:
     #新增资产组
     - test_name:

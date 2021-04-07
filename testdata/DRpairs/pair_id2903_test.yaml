@@ -3,6 +3,7 @@ testinfo:
   case_suite: pair_id2903_test
   descrpiton: 单个容灾对关系检测
   module_class: Test2903
+  rep_value: assert_db
 
 premise:
 set_up: !join ['${join_sql_result("select asset_pair_id as pairid from asset_relation where asset_id =',7,'")|tools.dbopration}']

@@ -39,7 +39,11 @@ def login():
                   response = requests.post(url=url+"/sign/login",json=req_data,headers=headers,verify=False)
                   data = response.json()
                   if data["success"]:
-                        token = response.json().get("data").get("token")
+                        ssotoken = response.json().get("data").get("token")
+                        #appId重新激活应用时，会变，要修改
+                        params = {"appId":"mc377723","token":ssotoken}
+                        res = requests.get(url=url+"/app/redirection?",params=params,headers=headers,verify=False,allow_redirects=False)
+                        token = res.headers.get("location").split("token=")[1]
                         print(token)
                         return token
                         break

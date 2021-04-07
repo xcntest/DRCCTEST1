@@ -2,6 +2,9 @@ testinfo:
   case_suite: group_id2875_test
   descrpiton: 删除资产组接口测试套件
   module_class: Test2875
+  rep_value: assert_db
+
+
 
 premise:
     #创建资产组

@@ -3,6 +3,7 @@ testinfo:
     case_suite: db2817_test
     descrpiton: 获取资产列表接口测试套件
     module_class: Test2817
+    rep_value: assert_db
 
 premise:
     #创建资产组信息接口

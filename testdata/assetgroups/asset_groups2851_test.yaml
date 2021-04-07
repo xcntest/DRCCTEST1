@@ -2,28 +2,30 @@ testinfo:
     case_suite: asset_groups2851_test
     descrpiton: 创建资产组信息接口测试套件
     module_class: Test2851
+    rep_value: groups_dict
+
 
 premise: ''
 set_up: ''
 
 
 tear_down:
-   #删除资产组
-    - test_name:
-      info: 新增资产组接口数据回收
-      mark: smoking
-      method: DELETE
-      url: !join [/api/v1/asset_groups/,$addgroupip]
-      headers:
-        Authorization: $token
-      timeout: 8
-      params: {}
-      data: ''
-      files: ''
-      json: {}
-      status: ''
-      extract: ''
-      expects:
+#   #删除资产组
+#    - test_name:
+#      info: 新增资产组接口数据回收
+#      mark: smoking
+#      method: DELETE
+#      url: !join [/api/v1/asset_groups/,$addgroupip]
+#      headers:
+#        Authorization: $token
+#      timeout: 8
+#      params: {}
+#      data: ''
+#      files: ''
+#      json: {}
+#      status: ''
+#      extract: ''
+#      expects:
 
 
 test_case:
@@ -40,8 +42,8 @@ test_case:
       data:
       files:
       json:
-        name: &name 查询资产组用资产组19
-        desc: 查询资产组用资产组
+        name: &name $name
+        desc: $desc
       status:
       extract:
         addgroupip: $.result.id

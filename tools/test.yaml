@@ -1,25 +1,45 @@
-case_suite: saber_referral_active_test
-descrpiton: 小程序转介绍活动后台管理接口测试
-moduels:
-  -moduel_class: TestReferralRules
-    desc: 转介绍规则
-    cases:
-      - story: test_referral_rule_list
-        desc: 默认规则列表查询
-        uri: /saber/backend/rule
-        method: post
-        headers:
-        type: data
-        data:
-          activity_end_at: '2019-04-06T23:59:59+08:00'
-          activity_start_at: '2019-02-23T00:00:00+08:00'
-          division: 中端
-          page: 1
-          page_size: 30
-        auth_user:
-          u: dongjie02
-        set_up:
-        tear_down:
-        asserts:
-          body.status: '00000'
-          body.data.orgArr[0]: '集团管理层'
+    - test_name: test_add_assert_db_succeed
+      info: 手动添加资产接口
+      mark: smoking
+      method: POST
+      url: /api/v1/assets/db
+      headers:
+        Authorization: $token
+      timeout: 15
+      params: {}
+      data: ''
+      files: ''
+      json:
+          db_name: $sourcedbname
+          asset_type: db
+          db_type: 272
+          instance: orcl
+          db_user: system
+          db_pwd: oracle
+          db_port: 1521
+          os_type: 16
+          ip: &ip 192.168.239.120
+          os_conn_type: 16
+          os_user: oracle
+          os_pwd: oracle
+          os_port: 22
+          group_ids: [$addDBgroupid]
+      status: ''
+      extract: ''
+      expects:
+          http_code: 200
+          body.code: 100000
+          body.message: 成功
+          body.result: !join ['${join_sql_result(','[',
+                                 '"','select a.id,a.cmdb_id,a.name as db_name,a.db_type,a.instance,a.status as db_status,a.port as db_port,a.dbversion,a.deleted from drcc.db as a where a.name = ',
+                                "'",$sourcedbname,"'",'"',',',
+                                '"','select h.os_type,h.ip,h.status as host_status from host as h where h.ip = ',
+                                "'",*ip,"'",'"',',',
+                                '"',"select owner_type as asset_type,name as db_user from account where owner_type='db' and owner_id = (select id from db where name = ",
+                                "'",$sourcedbname,"'",')",',
+                                '"',"select conn as os_conn_type,port as os_port,name as os_user from account where owner_type='host' and owner_id = (select id from db where name = ",
+                                "'",$sourcedbname,"'",')"',
+                                '])|tools.dbopration}']
+          body.result.group_ids: !join ['${get_value_only(','"',
+          'select group_id as group_ids from asset_group_relation  where owner_id = (select id from db where name = ',
+          "'",$sourcedbname,"'",')")|tools.dbopration}']

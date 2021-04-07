@@ -8,14 +8,12 @@
 
 import requests
 import jsonpath
-import time
 from common.constructdata import Constructdata
 from common.caseyamlparser import CaseYamlParser
 from common.yamlhandler import HadnlerYaml
 from common.logs import MyLog
 from common.login import login
 from tools.funcreplace import FuncReplace
-import urllib3
 
 #定义全局变量
 extractinfo = {}
@@ -64,16 +62,16 @@ def sendrequest(case_data,setupdata=None):
 
 
 class Send2Reques:
-    def __init__(self,filepath,case_name=None):
+    def __init__(self,filepath,case_name=None,rep_dict=None):
         """
         :param filepath: 从run_case内传入用例路径
         :param case_name:  单条用例函数名，run_case内的fun_name
         :param login:  从fixture传入的login返回
         """
-
-                           #全局关联参数字典,获取会话内所有接口的关联参数，用于用例模板替换
-        self.case_obj = CaseYamlParser(filepath)
+        #全局关联参数字典,获取会话内所有接口的关联参数，用于用例模板替换
+        self.case_obj = CaseYamlParser(filepath,rep_dict)
         self.case_name = case_name
+
 
     @property
     def ini_case(self):
@@ -157,9 +155,8 @@ class Send2Reques:
     #     except Exception as e:
     #         self.log.debug("接口调用失败,错误为{}，请求地址为：{}".format(e, request_data["url"]))
 
-
 if __name__ == '__main__':
-    request_obj = Send2Reques('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assetsuite/','test_add_assert_group')
+    request_obj = Send2Reques('/Users/xiongting/Desktop/工作/DRCC/DRCCTEST/testdata/assetgroups/asset_groups2851_test.yaml','test_add_assert_group')
     response, except_dict = request_obj.run_case
     print(response.status_code)
 

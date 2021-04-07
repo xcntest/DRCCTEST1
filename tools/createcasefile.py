@@ -42,11 +42,13 @@ from common.callcase import call_case
 import allure
 import pytest
 from common.requestsend import Send2Reques 
+import config
         
         """
             #建测试套件
             suit_desc = self.yaml_data.suite_desc
             case_module_class = self.yaml_data.case_module_class
+            rep_val = self.yaml_data.get_rep_value
             mod_example = '''
 @allure.feature('{}')
 class {}(object):
@@ -74,13 +76,22 @@ class {}(object):
                 case_name = case_obj.test_name
                 case_mark = case_obj.mark
                 case_desc = case_obj.info
-                case_example = '''
+                if rep_val:
+                    case_example = '''
+    @allure.story('{}')
+    @pytest.mark.{}
+    @call_case('{}',config.{})
+    def {}(self):
+        pass
+        '''.format(case_desc, case_mark,self.path,rep_val, case_name)
+                else:
+                    case_example = '''
     @allure.story('{}')
     @pytest.mark.{}
     @call_case('{}')
     def {}(self):
         pass
-        '''.format(case_desc, case_mark,self.path, case_name)
+        '''.format(case_desc, case_mark, self.path, case_name)
                 mod_example += case_example
             import_ += mod_example
 
